@@ -14,7 +14,8 @@ function InputBox(props){
           borderWidth: "1px",
           backgroundColor: 'var(--background-color)',
           transition: "box-shadow 0.3s ease",
-          margin: "5px"
+          margin: "5px",
+          paddingLeft: "10px"
         },
         "inputBox": {
           width: "100%",
