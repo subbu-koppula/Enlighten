@@ -20,7 +20,7 @@ function ToDo(props) {
     },[Todos]);   
 
     const converted = {
-          borderStyle: "solid",
+          borderStyle: "none",
           borderRadius: "10px",
           borderColor: "rgb(67, 69, 69)",
           borderWidth: "1px",

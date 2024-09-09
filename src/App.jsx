@@ -3,7 +3,9 @@ import Deadlines from "./components/Deadlines";
 import Todo from "./components/Todo";
 import Header from "./components/Header";
 import Timetable from "./components/timetable";
+import AppPage from "./components/app-page";
 import "./App.css";
+
 
 
 function App() {
@@ -15,14 +17,15 @@ function App() {
   ];
   return (
     <>
-      <Header ></Header>
+      {/* <Header ></Header>
       <div className="max-w-[1000px] place-content-center">
         <Timetable></Timetable>
         <div>
           <Todo></Todo>
           <Deadlines deadlines={deadlines}></Deadlines>
         </div>
-      </div>
+      </div> */}
+      <AppPage></AppPage>
     </>
   );
 }
