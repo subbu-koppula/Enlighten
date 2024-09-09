@@ -1,66 +1,44 @@
-import React from 'react';
+'use client';
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { CalendarIcon, ClockIcon } from "lucide-react"
 
-// Define an array of deadlines
-const deadlines = [
-  { assignment: 'Math Assignment', dueDate: '2023-07-15' },
-  { assignment: 'History Essay', dueDate: '2023-07-20' },
-  { assignment: 'Science Project', dueDate: '2023-07-25' },
-];
+const priorityColors = {
+  low: 'bg-green-100 text-green-800',
+  medium: 'bg-yellow-100 text-yellow-800',
+  high: 'bg-red-100 text-red-800'
+}
 
-const Deadlines = () => {
+export default function Deadlines({
+  deadlines
+}) {
+  if (!Array.isArray(deadlines) || deadlines.length === 0) {
+    return <p>No upcoming deadlines.</p>;
+  }
+
+  const sortedDeadlines = [...deadlines].sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
+
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Upcoming Deadlines</h2>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Assignment</th>
-            <th style={styles.th}>Due Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {deadlines.map((deadline, index) => (
-            <tr key={index}>
-              <td style={styles.td}>{deadline.assignment}</td>
-              <td style={styles.td}>{deadline.dueDate}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    (<div className="space-y-4">
+      {sortedDeadlines.map((deadline) => (
+        <Card key={deadline.id}>
+          <CardContent className="p-4 flex items-start justify-between">
+            <div className="space-y-1">
+              <h3 className="text-lg font-semibold">{deadline.title}</h3>
+              <p className="text-sm text-gray-500">{deadline.course}</p>
+              <div className="flex items-center space-x-2 text-sm text-gray-500">
+                <CalendarIcon className="w-4 h-4" />
+                <span>{new Date(deadline.dueDate).toLocaleDateString()}</span>
+                <ClockIcon className="w-4 h-4 ml-2" />
+                <span>{new Date(deadline.dueDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+              </div>
+            </div>
+            <Badge className={`${priorityColors[deadline.priority]} capitalize`}>
+              {deadline.priority}
+            </Badge>
+          </CardContent>
+        </Card>
+      ))}
+    </div>)
   );
-};
-
-// Add some basic styles
-const styles = {
-  container: {
-    margin: '20px',
-    padding: '10px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    width: '50%',
-  },
-  heading: {
-    textAlign: 'left',
-    color: '#333',
-    fontSize: '24px',
-    marginBottom: '15px',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-  },
-  th: {
-    borderBottom: '2px solid #ddd',
-    padding: '10px',
-    textAlign: 'left',
-    color: '#333',
-    fontWeight: 'bold',
-  },
-  td: {
-    padding: '10px',
-    borderBottom: '1px solid #ddd',
-  },
-};
-
-export default Deadlines;
+}
