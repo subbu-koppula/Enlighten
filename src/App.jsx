@@ -9,6 +9,7 @@ import "./App.css";
 
 
 function App() {
+  //This should be fetched from server. 
   const deadlines = [
     { id: 1, title: 'MFCS Assignment 3', dueDate: '2024-09-20T23:59:00', course: 'MFCS', priority: 'high' },
     { id: 2, title: 'SE Project Proposal', dueDate: '2023-07-20T15:00:00', course: 'SE', priority: 'medium' },
